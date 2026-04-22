@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lavell Patterson — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f5f0;
+      --ink: #1a1814;
+      --muted: #7a756d;
+      --accent: #c84b2f;
+      --card: #ffffff;
+      --border: rgba(26,24,20,0.1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2.5rem;
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 2.5rem; max-width: 900px; margin: 0 auto; }
+
+    /* ── HERO ── */
+    #hero {
+      padding-top: 7rem;
+      padding-bottom: 6rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end;
+    }
+    .hero-tag {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      line-height: 1.1;
+      font-weight: 400;
+      margin-bottom: 1.25rem;
+    }
+    .hero-bio {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    .btn-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.4rem;
+      border-radius: 2px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--ink);
+      color: var(--bg);
+      border: 1.5px solid var(--ink);
+    }
+    .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+    .btn-outline {
+      background: transparent;
+      color: var(--ink);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--ink); }
+
+    .hero-aside {
+      text-align: right;
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 2;
+    }
+    .hero-aside strong { display: block; color: var(--ink); font-weight: 500; font-size: 0.95rem; }
+
+    /* ── DIVIDER ── */
+    hr { border: none; border-top: 1px solid var(--border); max-width: 900px; margin: 0 auto; }
+
+    /* ── PROJECTS ── */
+    .section-heading {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.75rem;
+      font-weight: 400;
+      margin-bottom: 2.5rem;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(26,24,20,0.08);
+    }
+    .project-num {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+    }
+    .project-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+    }
+    .project-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.5rem; }
+    .tag {
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--muted);
+    }
+    .project-links { display: flex; gap: 1rem; margin-top: 0.5rem; }
+    .project-links a {
+      font-size: 0.8rem;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .project-links a:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ── SKILLS ── */
+    #skills .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .skill {
+      font-size: 0.875rem;
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--ink);
+      background: var(--card);
+    }
+
+    /* ── ABOUT ── */
+    #about p {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 600px;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    #about p:first-of-type { color: var(--ink); font-size: 1.1rem; }
+
+    /* ── CONTACT ── */
+    #contact .contact-inner {
+      background: var(--ink);
+      color: var(--bg);
+      border-radius: 4px;
+      padding: 3rem;
+    }
+    #contact h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 0.75rem;
+      color: var(--bg);
+    }
+    #contact p { color: rgba(247,245,240,0.6); margin-bottom: 2rem; font-size: 0.95rem; }
+    #contact .btn-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    #contact .btn-primary:hover { background: #a83a21; border-color: #a83a21; }
+    #contact .btn-outline { color: var(--bg); border-color: rgba(247,245,240,0.25); }
+    #contact .btn-outline:hover { border-color: var(--bg); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 600px) {
+      nav { padding: 1.25rem 1.25rem; }
+      section { padding: 3.5rem 1.25rem; }
+      #hero { grid-template-columns: 1fr; }
+      .hero-aside { text-align: left; }
+      #contact .contact-inner { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">Lavell Patterson </a>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div>
+    <p class="hero-tag">Computer Science Student </p>
+    <h1>What I’ve been building</h1>
+    <p class="hero-bio">Hello, I am a second year computer science student with a passion for computer science.</p>
+    <div class="btn-row">
+      <a href="#projects" class="btn btn-primary">See my projects</a>
+      <a href="#contact" class="btn btn-outline">Get in touch</a>
+    </div>
+  </div>
+  <div class="hero-aside">
+    <strong>Based in</strong>
+    Detroit, Michigan
+    <strong>Status</strong>
+    Available For Work 
+  </div>
+</section>
+
+<hr/>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <h2 class="section-heading fade-in">Projects </h2>
+  <div class="projects-grid">
+
+    <div class="project-card fade-in">
+      <span class="project-num">01</span>
+      <p class="project-name">Markdown Parser</p>
+      <p class="project-desc">Converts Markdown strings into HTML strings.</p>
+      <div class="project-tags">
+        <span class="tag">C++</span>
+      </div>
+      <div class="project-links">
+      <a href="https://github.com/lpatterson5/markdown-parser" target="_blank">Github↗</a>      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <span class="project-num">02</span>
+      <p class="project-name">AI Maze</p>
+      <p class="project-desc">This project is a command-line game built that supports AI-controlled gameplay.</p>
+      <div class="project-tags">
+        <span class="tag">C++</span>
+      </div>
+      <div class="project-links">
+      <a href="https://github.com/lpatterson5/AI-Project-" target="_blank">Github↗</a>
+
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <span class="project-num">03</span>
+      <p class="project-name">Task Manager</p>
+      <p class="project-desc">Simple python task manager. </p>
+      <div class="project-tags">
+        <span class="tag">Python</span>
+      </div>
+      <div class="project-links">
+      <a href="https://github.com/lpatterson5/python-task-manager" target="_blank">Github↗</a>      </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr/>
+
+<!-- SKILLS -->
+<section id="skills">
+  <h2 class="section-heading fade-in">Skills</h2>
+  <div class="skills-list fade-in">
+    <span class="skill">Python</span>
+    <span class="skill">C++</span>
+    <span class="skill">HTML</span>
+    <span class="skill">Git & GitHub</span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ABOUT -->
+<section id="about">
+  <h2 class="section-heading fade-in">About me</h2>
+  <div class="fade-in">
+    <p>I'm currently a second year computer science student heading into my third year.</p>
+  <p>So far, I've been focused on the basics such as object-oriented programming and algorithms.</p>
+    <p>Currently based in Detroit, Michigan. </p>
+  </div>
+</section>
+
+<hr/>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="contact-inner fade-in">
+    <h2>Contact</h2>
+    <p>Feel free to reach out if you're interested in working together or just want to connect.</p>
+
+    <div class="btn-row">
+      <a href="mailto:lavellpatterson5@gmail.com" class="btn btn-primary">
+        Email Me
+      </a>
+
+      <a href="tel:3137379338" class="btn btn-outline">
+        Call Me
+      </a>
+
+      <a href="https://github.com/lpatterson5" target="_blank" class="btn btn-outline">
+        GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Lavell Patterson — Built with HTML, CSS &amp; JS
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
